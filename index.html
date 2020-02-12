@@ -1,0 +1,140 @@
+<apex:page renderAs="pdf" controller="blankPDF_testclass" ApplyhtmlTag="false" ApplyBodyTag="false" showHeader="false" cache="true" >
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />  
+        <style type="text/css" media="print"> 
+            body { font-family: Arial Unicode MS; font-size:12pt;  }
+            @page {
+            
+            size: A4;
+            margin-left: 5mm;
+            margin-right: 5mm;
+            margin-top: 25mm;
+            margin-bottom: 25mm;
+            font-family: Arial Unicode MS;
+            border: 2px solid black;
+            @top-left { 
+            content:element(header) ;
+            
+            height:1000px;             
+            }
+            
+            @bottom-left {
+            content:element(footer);                  
+            font-family: sans-serif;
+            font-size: 50%;
+            }
+            @bottom-right {
+            content: "Page " counter(page) " of " counter(pages);
+            }
+            }
+            
+            div.footer {
+            
+            display: block;
+            
+            padding: 5px;
+            
+            position: running(footer);
+            
+            }
+            
+            div.header {
+            
+            display: block;
+            
+            padding: 5px;
+            
+            position: running(header);
+            
+            }
+            
+            .templateStyle {
+            border-collapse:collapse;
+            border: 1px solid black;
+            }
+            .fieldName {
+            font-weight:bold;
+            }
+            .page-break {
+            display:block;
+            page-break-after:always;
+            }
+            .titleText {
+            font-size:18pt;
+            }
+            .templateHeader {
+            font-size:15pt;
+            font-weight:bold;
+            }
+            .groupName {
+            font-weight:bold;
+            background: grey;
+            }
+            .questionText {
+            word-wrap: break-word; width: 50%; 
+            work-break:break-all;
+            font-family: Arial Unicode MS;
+            }
+            .answerText {
+            word-wrap: break-word; width: 50%;
+            font-family: Arial Unicode MS;
+            }
+            .seperator {
+            word-wrap: break-word; width: 50%;
+            height: 1px; 
+            }
+            .page-header {
+            padding-bottom: 9px;
+            margin: 20px 0 30px;
+            border-bottom: 1px solid;
+            }
+            
+            table {
+            font-size:12pt;
+            border-width: 0.5px;
+            border-collapse: collapse;
+            //border: 1px solid black;
+            table - layout: fixed;
+            width:100%;
+            
+            }
+            table th {
+            border-width: 0.5px;
+            padding: 8px;
+            border-style: solid;
+            border: 1px solid black;
+            }
+            td {
+            border-width: 0.5px;
+            border: 1px solid black;
+            padding: 8px;
+            border-style: solid; 
+            overflow-wrap: break-word; 
+            word-wrap: break-word; 
+            vertical-align: top;
+            text-align:left;
+            font-size:13px;                              
+            }
+            
+        </style>
+    </head>
+    <center>
+    <apex:sectionHeader title="{!FormList.Label__c}"/>
+      Instructions: &nbsp;<apex:outputText value="{!FormList.Instructions__c}" escape="false"  style="font-weight:bold; background:white;" /> 
+    </center>
+    
+    <table  cellspacing="0" >
+        <tr>
+            <th width="10%"> <center>Q No.</center> </th>
+            <th width="40%"> <center>Questions</center> </th>
+            <th width="50%"> <center>Question Options</center> </th>
+        </tr>
+        <apex:repeat value="{!wraplist}" var="QLevel1" >
+            <tr>
+            		<td>{!QLevel1.Ques.Question_Text__c}</td>
+            </tr>
+        </apex:repeat>
+    </table>
+    
+    
+</apex:page>
